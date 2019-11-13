@@ -1,8 +1,14 @@
 const path = require('path');
 
+console.log('HELLO', process.env.NODE_ENV);
+
 module.exports = {
   entry: './src/index.js',
-  mode: process.env.NODE_ENV,
+  output: {
+    filename: './main.js',
+    path: path.resolve(__dirname, './public/build'),
+    // publicPath: path.resolve(__dirname, '/build')
+  },
   module: {
     rules: [
       {
@@ -12,23 +18,9 @@ module.exports = {
         options: { presets: ['@babel/env', '@babel/preset-react'] }
       },
       {
-        test: /\.css$/,
-        use: ['style-loader', 'css-loader']
+        test: /\.(png|svg|jpg|gif)$/,
+        use: ['file-loader']
       }
     ]
-  },
-  resolve: { extensions: ['*', '.js', '.jsx'] },
-  output: {
-    path: path.resolve(__dirname, 'dist/'),
-    publicPath: '/dist/',
-    filename: 'bundle.js'
-  },
-  devServer: {
-    historyApiFallback: true,
-    contentBase: path.join(__dirname, 'public/'),
-    // !DEFAULT PORT IS 8080
-    // port: 3000,
-    publicPath: 'http://localhost:3000/dist/'
-  },
-  disableHostCheck: true
+  }
 };
