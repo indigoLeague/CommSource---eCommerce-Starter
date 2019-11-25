@@ -1,4 +1,5 @@
 const path = require('path');
+const htmlWebpack = require('html-webpack-plugin');
 
 module.exports = {
   entry: './src/index.js',
@@ -24,5 +25,11 @@ module.exports = {
         use: ['style-loader', 'css-loader']
       }
     ]
-  }
+  },
+  plugins: [
+    new htmlWebpack({
+      //use the index.html file as our template to create the html in bundle
+      template: './src/index.html'
+    })
+  ]
 };
