@@ -1,12 +1,10 @@
 const path = require('path');
 
-console.log('HELLO', process.env.NODE_ENV);
-
 module.exports = {
   entry: './src/index.js',
   output: {
     filename: './main.js',
-    path: path.resolve(__dirname, './public/build'),
+    path: path.resolve(__dirname, './public/build')
     // publicPath: path.resolve(__dirname, '/build')
   },
   module: {
@@ -20,6 +18,10 @@ module.exports = {
       {
         test: /\.(png|svg|jpg|gif)$/,
         use: ['file-loader']
+      },
+      {
+        test: /\.css$/i,
+        use: ['style-loader', 'css-loader']
       }
     ]
   }
