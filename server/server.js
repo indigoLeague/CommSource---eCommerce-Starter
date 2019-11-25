@@ -3,8 +3,6 @@ const http = require('http');
 const path = require('path');
 require('dotenv').config();
 
-const dbPassword = process.env.DATABASE_PASSWORD;
-
 const itemRouter = require('./routes/item-router');
 
 
