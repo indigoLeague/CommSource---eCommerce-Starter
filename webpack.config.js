@@ -16,7 +16,8 @@ module.exports = {
     watchContentBase: true,
     proxy: {
       '/': 'http://localhost:3000',
-      '/item': 'http://localhost:3000'
+      '/item': 'http://localhost:3000',
+      '/item/*': 'http://localhost:3000'
     }
   },
   module: {

@@ -7,6 +7,9 @@ const itemController = {};
 
 itemController.getItem = (req, res, next) => {
   console.log('!!!!!!! in item Controller');
+  const items = Item.find((err, suc) => {
+    console.log('suc', suc);
+  });
 };
 
 module.exports = itemController;
