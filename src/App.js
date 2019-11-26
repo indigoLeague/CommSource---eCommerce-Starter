@@ -8,10 +8,10 @@ import './stylesheets/styles.scss';
 class App extends React.Component {
   render() {
     return (
-      <div>
+      <>
         <Storefront />
-      </div>
-    )
+      </>
+    );
   }
 }
 

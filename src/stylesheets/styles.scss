@@ -6,14 +6,18 @@ $accent-color: #ffffff;
 // Link to color palette:
 // http://pokepalettes.com/#squirtle
 
+#root {
+  height: 100vh;
+}
 .storeFront {
+  height: 100%;
   display: grid;
   grid-template-columns: repeat(3, 1fr);
   grid-column-gap: 10px;
   grid-template-rows: 50px 2fr;
 }
 
-.bannerTop {
+#bannerTop {
   grid-column: 1 / 4;
   background-color: $tertiary-color;
 }
@@ -23,8 +27,10 @@ $accent-color: #ffffff;
   background-color: $secondary-color;
 }
 
-.bannerRight {
+#bannerRight {
   grid-column: 3 / 4;
+  background-color: $accent-color;
+
 }
 
 body {
