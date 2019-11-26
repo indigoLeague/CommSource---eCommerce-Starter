@@ -9,8 +9,9 @@ router.get('/loaditems', itemController.getAllItems, (req, res, next) => {
   res.status(200).send(res.locals.allItems);
 });
 
-router.post('/buyitems', itemController.getAllItems, itemController.buyItems, (req, res, next) => {
+router.post('/buyitems', itemController.buyItems, (req, res, next) => {
   console.log('in router post: buy items, item-router');
+  next();
 });
 
 // router.get('/:id', itemController.getItem, (req, res, next) => {

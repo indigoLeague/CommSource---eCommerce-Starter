@@ -16,14 +16,7 @@ itemController.getAllItems = async (req, res, next) => {
 };
 
 itemController.buyItems = (req, res, next) => {
-  console.log('in buyItems, item-controller');
   const toBeUpdated = Object.entries(req.body);
-
-  // items to updated (as array)
-  console.log('tobeupdated', toBeUpdated);
-
-  // all items in db (as array)
-  // console.log('reslocals', res.locals.allItems);
 
   for (let i = 0; i < toBeUpdated.length; i++) {
     const currentTBU = toBeUpdated[i];
@@ -33,12 +26,15 @@ itemController.buyItems = (req, res, next) => {
     Item.find({ name: currentTBU[0] }, (err, succ) => {
       const oldQuantity = succ[0].quantity;
       const newQuantity = oldQuantity - currentTBU[1].quantity;
+
+      if (newQuantity < 0) return next({ error: `unable to checkout; item ${currentTBU[0]} is out of stock` });
+
       // update that particular item's quantity by subtracting
       Item.update({ name: succ[0].name }, { quantity: newQuantity }, (er, suc) => {
         if (err) {
-          console.log('error:', err.stack);
+          next(err);
         } else {
-          console.log('succ', succ);
+          next();
         }
       });
     });
