@@ -16,6 +16,8 @@ module.exports = {
     watchContentBase: true,
     proxy: {
       '/': 'http://localhost:3000',
+      '/item': 'http://localhost:3000',
+      '/item/*': 'http://localhost:3000'
     }
   },
   module: {
@@ -31,8 +33,8 @@ module.exports = {
         use: ['file-loader']
       },
       {
-        test: /\.css$/i,
-        use: ['style-loader', 'css-loader']
+        test: /\.s?css$/i,
+        use: ['style-loader', 'css-loader', 'sass-loader']
       }
     ]
   },

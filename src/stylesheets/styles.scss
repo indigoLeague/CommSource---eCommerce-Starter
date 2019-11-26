@@ -1,0 +1,39 @@
+$primary-color: #297383;
+$secondary-color: #832900;
+$tertiary-color: #ffd56a;
+$accent-color: #ffffff;
+
+// Link to color palette:
+// http://pokepalettes.com/#squirtle
+
+#root {
+  height: 100vh;
+}
+.storeFront {
+  height: 100%;
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  grid-column-gap: 10px;
+  grid-template-rows: 50px 2fr;
+}
+
+#bannerTop {
+  grid-column: 1 / 4;
+  background-color: $tertiary-color;
+}
+
+.feed {
+  grid-column: 1 / 3;
+  background-color: $secondary-color;
+}
+
+#bannerRight {
+  grid-column: 3 / 4;
+  background-color: $accent-color;
+
+}
+
+body {
+  background-color: $primary-color;
+  margin: 0;
+}
