@@ -4,8 +4,18 @@ const router = express.Router();
 
 const itemController = require('../controllers/item-controller');
 
-router.get('/:id', itemController.getItem, (req, res, next) => {
-  console.log('retrieved item in item router');
+// route to load all items from db
+router.get('/loaditems', itemController.getAllItems, (req, res, next) => {
+  res.status(200).send(res.locals.allItems);
 });
+
+router.post('/buyitems', itemController.buyItems, (req, res, next) => {
+  console.log('in router post: buy items, item-router');
+  next();
+});
+
+// router.get('/:id', itemController.getItem, (req, res, next) => {
+//   console.log('retrieved item in item router');
+// });
 
 module.exports = router;
