@@ -17,6 +17,15 @@ $accent-color: #ffffff;
   grid-template-rows: 50px 2fr;
 }
 
+.navLinks {
+  width: 100%;
+  display: block;
+  // float: left;
+  color: white;
+  text-align: center;
+  padding: 14px 16px;
+}
+
 #bannerTop {
   grid-column: 1 / 4;
   background-color: $tertiary-color;
