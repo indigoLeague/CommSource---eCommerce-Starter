@@ -1,5 +1,4 @@
 import React, { Component } from 'react';
-import Checkout from '../components/Checkout.jsx'
 import {Link, withRouter} from 'react-router-dom'
 
 class ShoppingCart extends Component {
@@ -13,7 +12,6 @@ class ShoppingCart extends Component {
         <Link to="/checkout" >
           <button> proceed to checkout </button>
         </Link>
-        {/* <Checkout /> */}
       </>
     );
   }

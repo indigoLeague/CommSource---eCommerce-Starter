@@ -30,11 +30,11 @@ app.get('/', (req, res) => {
 });
 
 app.use('/item', itemRouter, (req, res) => {
-  console.log('retrieved item in server.js');
+  console.log('item in server.js');
 });
 
 app.use('/user', userRouter, (req, res) => {
-  console.log('retrieved user in server.js');
+  console.log('user in server.js');
 });
 
 app.listen(3000, () => console.log('listening on 3000'));
