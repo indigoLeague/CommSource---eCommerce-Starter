@@ -15,6 +15,26 @@ import './stylesheets/styles.scss';
 // const ReactRTC = require('react-rtc-real');
 
 class App extends React.Component {
+  constructor(props) {
+    super(props);
+    this.state = {
+      products: [],
+      shoppingCart: [],
+      profile: {},
+      loggedIn: false
+    };
+  }
+
+  componentDidMount() {
+    fetch('/item/loaditems')
+      .then(res => res.json())
+      .then(products => {
+        this.setState({
+          products,
+        });
+      });
+  }
+
   render() {
     return (
       <Router>
@@ -27,7 +47,7 @@ class App extends React.Component {
               <Route path="/shoppingcart" component={ShoppingCart} />
               <Route path="/checkout" component={Checkout} />
               <Route component={NotFound} />
-            </Switch> 
+            </Switch>
           </div>
           <BannerRight />
         </div>
