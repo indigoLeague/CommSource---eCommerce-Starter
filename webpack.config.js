@@ -17,7 +17,8 @@ module.exports = {
     proxy: {
       '/': 'http://localhost:3000',
       '/item': 'http://localhost:3000',
-      '/item/*': 'http://localhost:3000'
+      '/item/*': 'http://localhost:3000',
+      '/profile': 'http://localhost:3000'
     }
   },
   module: {

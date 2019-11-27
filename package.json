@@ -30,6 +30,7 @@
     "path": "^0.12.7",
     "react": "^16.11.0",
     "react-dom": "^16.11.0",
+    "react-router-dom": "^5.1.2",
     "sass-loader": "^8.0.0"
   },
   "devDependencies": {
