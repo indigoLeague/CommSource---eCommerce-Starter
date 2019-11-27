@@ -7,6 +7,7 @@ import Profile from './components/Profile.jsx';
 import ShoppingCart from './components/ShoppingCart.jsx';
 import NotFound from './components/NotFound.jsx';
 import BannerRight from './containers/BannerRight.jsx';
+import Checkout from './components/Checkout.jsx';
 // import Storefront from './containers/Storefront.jsx';
 
 import './stylesheets/styles.scss';
@@ -17,14 +18,19 @@ class App extends React.Component {
   render() {
     return (
       <Router>
-        <Switch>
-          <Route exact path="/" component={ProductContainer} />
-          <Route path="/profile" component={Profile} />
-          <Route path="/shoppingcart" component={ShoppingCart} />
-          <Route component={NotFound} />
-        </Switch>
-        <BannerTop />
-        <BannerRight />
+        <div className="storeFront">
+          <BannerTop />
+          <div className="feed">
+            <Switch>
+              <Route exact path="/" component={ProductContainer} />
+              <Route path="/profile" component={Profile} />
+              <Route path="/shoppingcart" component={ShoppingCart} />
+              <Route path="/checkout" component={Checkout} />
+              <Route component={NotFound} />
+            </Switch> 
+          </div>
+          <BannerRight />
+        </div>
       </Router>
     );
   }

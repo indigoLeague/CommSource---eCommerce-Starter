@@ -1,9 +1,28 @@
-import React from 'react';
+import React, { Component } from 'react';
+import {Link, withRouter} from 'react-router-dom'
 
-function ShoppingCart() {
-  return (
-    <div>this is shopping cart component</div>
-  );
+class ShoppingCart extends Component {
+  render() {
+    return (
+      <>
+        <h1> This is the shopping card</h1>
+        <h2> product 1</h2>
+        <h2> product 2</h2>
+        <h2> product 3</h2>
+        <Link to="/checkout" >
+          <button> proceed to checkout </button>
+        </Link>
+      </>
+    );
+  }
 }
 
-export default ShoppingCart;
+export default withRouter(ShoppingCart);
+
+
+
+
+
+
+
+
