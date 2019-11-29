@@ -12,10 +12,10 @@ class ShoppingCart extends Component {
             create a loop which will create a product summary for each 
             item the has been added to the shopping cart
         */}
-        <h2 className="cartProductHeader" > Product Header 1</h2>
+        <h2 className="cartProductHeader"> Product Header 1</h2>
         <h2 className="cartProductHeader"> Product Header 2</h2>
         <h2 className="cartProductHeader"> Product Header 3</h2>
-
+        <h2 className="cartProductHeader"> Product Header 4</h2>
         <Link to="/checkout" >
           <button className="cartProductHeader"> proceed to checkout </button>
         </Link>
