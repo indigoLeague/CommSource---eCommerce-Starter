@@ -11,6 +11,8 @@ function Login(props) {
         <label> Password</label>
         <input type="password" name="password" value={props.state.password} onChange={(e) => props.handleChange(e)} />
       </div>
+      {/* <input type="hidden" name="_csrf" value="_csrf" /> */}
+
       <input type="submit" value="Login" />
     </form>
   );

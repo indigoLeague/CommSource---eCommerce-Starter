@@ -12,6 +12,10 @@ class BannerRight extends Component {
     this.handleLoginSubmit = this.handleLoginSubmit.bind(this);
   }
 
+  componentDidMount() {
+    console.log('banner props', this.props);
+  }
+
   handleChange(e) {
     e.persist();
     // console.log(e.target, e.target.name);
@@ -23,7 +27,14 @@ class BannerRight extends Component {
 
   handleLoginSubmit(e) {
     e.preventDefault();
-    console.log(this.state);
+    fetch('/user/signin', {
+      method: 'POST',
+      headers: {
+        Accept: 'application/json',
+        'Content-Type': 'application/json'
+      },
+      body: JSON.stringify({ name: this.state.name, password: this.state.password })
+    });
   }
 
   render() {

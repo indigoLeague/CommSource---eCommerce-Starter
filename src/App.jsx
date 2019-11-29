@@ -1,5 +1,6 @@
 import React from 'react';
 import { BrowserRouter as Router, Switch, Route } from 'react-router-dom';
+import { withCookies } from 'react-cookie';
 
 import BannerTop from './components/BannerTop.jsx';
 import ProductContainer from './containers/ProductContainer.jsx';
@@ -27,8 +28,8 @@ class App extends React.Component {
 
   componentDidMount() {
     fetch('/item/loaditems')
-      .then(res => res.json())
-      .then(products => {
+      .then((res) => res.json())
+      .then((products) => {
         this.setState({
           products,
         });
@@ -49,11 +50,11 @@ class App extends React.Component {
               <Route component={NotFound} />
             </Switch>
           </div>
-          <BannerRight />
+          <BannerRight cookies={this.props.cookies} />
         </div>
       </Router>
     );
   }
 }
 
-export default App;
+export default withCookies(App);
