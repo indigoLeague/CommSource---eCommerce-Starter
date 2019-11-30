@@ -39,6 +39,7 @@ $border-edges: 10px;
   grid-row-gap: 30px;
   background-color: $secondary-color;
   border: 2px solid black;
+  padding-bottom: 40px;
 }
 
 #bannerRight {
@@ -66,6 +67,17 @@ body {
 
 .cartProductHeader {
   grid-column: 3 / 8;
+}
+
+.checkNavButton {
+  width: 100px;
+  height: 30px;
+  border: 2px solid $accent-color;
+  border-radius: $border-edges;
+}
+
+.shoppingList {
+  list-style-type: none;
 }
 
 .checkoutHeader {

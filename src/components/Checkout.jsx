@@ -56,11 +56,15 @@ class Checkout extends Component {
         </div>
           
         <br></br>
-        <button> send order </button>
-        <br></br>
-        <Link to="/">
-          <button> back </button>
-        </Link>
+
+        <div className="cartProductHeader">
+          <Link to="/shoppingcart">
+            <button className="checkNavButton"> back </button>
+          </Link>
+          <Link to="/confirmation">
+            <button className="checkNavButton"> send order </button>
+          </Link>
+        </div>
 
       </>
     );
