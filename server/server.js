@@ -34,8 +34,17 @@ const csrfProtection = csrf({ cookie: true });
 app.use(express.static(path.join(__dirname, '../public')));
 
 app.get('/', csrfProtection, (req, res) => {
-  // if (req.cookies.sessionToken && req.session.userId) return res.redirect(307, '/auth');
   res.sendFile(path.resolve(__dirname, '../src/index.html'), { csrfToken: req.csrfToken() });
+});
+
+app.get('/who', (req, res, next) => {
+  if (req.cookies.sessionToken && req.session.userId) {
+    User.find({ _id: req.session.userId }, (err, success) => {
+      if (err) return next(err);
+      return res.json({ user: success[0], session: req.sessionID });
+    });
+    // return res.json({ user: req.session.userId, session: req.sessionID });
+  }
 });
 
 // app.use('/auth', csrfProtection, (req, res) => {

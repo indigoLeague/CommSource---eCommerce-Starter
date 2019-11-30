@@ -27,6 +27,10 @@ class App extends React.Component {
   }
 
   componentDidMount() {
+    fetch('/who')
+      .then((res) => res.json())
+      .then((data) => { if (data) console.log('DATA', data); });
+
     fetch('/item/loaditems')
       .then((res) => res.json())
       .then((products) => {
