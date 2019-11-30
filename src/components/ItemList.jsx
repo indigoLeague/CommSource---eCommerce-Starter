@@ -1,7 +1,6 @@
 import React from 'react';
 
 const ItemList = (props) => {
-  console.log("ran ItemList")
 
   return (
     <li>
