@@ -21,11 +21,11 @@ class ShoppingCart extends Component {
       <>
         <h1 className="cartHeader"> | Shopping Cart |</h1>
         
-        <ul className="cartProductHeader shoppingList">
+        <ul className="cartProduct shoppingList">
           {this.generateList(this.props.shoppingCart)}
         </ul>
 
-        <div className="cartProductHeader">
+        <div className="cartProduct">
           <Link to="/checkout" >
             <button className="checkNavButton"> proceed to checkout </button>
           </Link>
