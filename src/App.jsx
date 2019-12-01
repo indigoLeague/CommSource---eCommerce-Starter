@@ -70,7 +70,6 @@ class App extends React.Component {
     const cart = this.state.shoppingCart;
     cart.push(item);
     return this.setState({ shoppingCart: cart });
-    // console.log('shoppingCart after adding item: ', this.state.shoppingCart);
   }
 
   render() {

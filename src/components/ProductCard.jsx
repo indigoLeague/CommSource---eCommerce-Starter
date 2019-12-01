@@ -1,8 +1,7 @@
 /* eslint-disable react/button-has-type */
-import React, { useState } from 'react';
+import React from 'react';
 
 function ProductCard(props) {
-  const [itemQty, addItems] = useState(props.quantity);
 
   return (
     <div className="productCard">
@@ -10,18 +9,13 @@ function ProductCard(props) {
       <img src="../assets/ecommerceItem.jpg" alt="Buy this awesome item!" />
       <p>{props.description}</p>
       <p>${props.price}</p>
-      <p>{itemQty} items left</p>
-      <button onClick={(event) => {
-        if (itemQty) {
-          addItems(itemQty - 1);
-          // props.addToCart('test');
-        } else { return 0 }
-      }}>
+      <p>{props.quantity} items left</p>
+      <button onClick={() => props.addToCart(props)}>
         Add to Cart
       </button>
-      <button onClick={() => (itemQty < props.quantity) ? addItems(itemQty + 1) : props.quantity}>
+      {/* <button onClick={() => (itemQty < props.quantity) ? addItems(itemQty + 1) : props.quantity}>
         Remove from Cart
-      </button>
+      </button> */}
     </div>
   )
 };

@@ -44,11 +44,17 @@ $border-edges: 10px;
 .productContainer {
   display: flex;
   overflow: wrap;
+  justify-content: space-around;
 }
 
 .productCard {
   background-color: $tertiary-color;
   border: 1px solid black;
+  align-items: center;
+  img {
+    height: 100px;
+    width: 100px;
+  }
 }
 
 #bannerRight {
