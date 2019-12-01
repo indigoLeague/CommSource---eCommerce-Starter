@@ -11,6 +11,7 @@ class BannerRight extends Component {
     this.handleChange = this.handleChange.bind(this);
     this.handleLoginSubmit = this.handleLoginSubmit.bind(this);
     this.handleLogOut = this.handleLogOut.bind(this);
+    this.handleSignUp = this.handleSignUp.bind(this);
   }
 
   componentDidMount() {
@@ -33,6 +34,18 @@ class BannerRight extends Component {
       .then(this.props.updateLogOut);
   }
 
+  handleSignUp(e) {
+    e.preventDefault();
+    fetch('/user/signup', {
+      method: 'POST',
+      headers: {
+        Accept: 'application/json',
+        'Content-Type': 'application/json'
+      },
+      body: JSON.stringify({ name: this.state.name, password: this.state.password })
+    });
+  }
+
   handleLoginSubmit(e) {
     e.preventDefault();
     fetch('/user/signin', {
@@ -51,7 +64,9 @@ class BannerRight extends Component {
 
   render() {
     return (
-      <Login appState={this.props.state} state={this.state} handleChange={this.handleChange} handleLoginSubmit={!this.props.state.loggedIn ? this.handleLoginSubmit : this.handleLogOut} />
+      <>
+        <Login className="login-form" appState={this.props.state} state={this.state} handleChange={this.handleChange} handleSignUp={this.handleSignUp} handleLoginSubmit={!this.props.state.loggedIn ? this.handleLoginSubmit : this.handleLogOut} />
+      </>
     );
   }
 }

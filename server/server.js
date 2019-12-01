@@ -58,7 +58,9 @@ app.get('/who', (req, res, next) => {
 //   // console.log(userInfo);
 //   res.sendFile(path.resolve(__dirname, '../src/index.html'), { csrfToken: req.csrfToken() });
 // });
-
+app.use('/shoppingcart', (req, res) => {
+  res.redirect('/');
+});
 app.use('/item', itemRouter, (req, res) => {
   console.log('item in server.js');
 });

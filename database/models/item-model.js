@@ -1,5 +1,5 @@
 const mongoose = require('mongoose');
-// require('dotenv').config();
+require('dotenv').config();
 
 const { Schema } = mongoose;
 // mongoose.connect(`mongodb+srv://chriswillsflannery:${process.env.DATABASE_PASSWORD}@cluster0-bp9pd.mongodb.net/ecommerce-starter?retryWrites=true&w=majority`, { useNewUrlParser: true, useUnifiedTopology: true });
