@@ -11,6 +11,8 @@ userController.doesUserExist = async (req, res, next) => {
     if (err) return next({ error: err.stack });
 
     if (succ[0] === undefined) {
+      const sessionData = req.session;
+      sessionData._id = req.body.name;
       next();
     } else {
       next({ error: 'User Already Exists!' });

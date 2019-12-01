@@ -7,9 +7,8 @@ const User = require('../../database/models/user-model');
 
 router.post('/signup', userController.doesUserExist, (req, res, next) => {
   console.log('POST signup in user router');
-
   const newUser = new User({
-    name: req.body.name, password: req.body.password, cartSession: {}, loginSession: req.cookies.sessionToken
+    name: req.body.name, password: req.body.password, cartSession: {}, loginSession: req.session
   });
   newUser.save((err, user) => {
     if (err) return res.status(418).send(err);
