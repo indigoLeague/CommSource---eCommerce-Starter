@@ -39,6 +39,7 @@ $border-edges: 10px;
   grid-row-gap: 30px;
   background-color: $secondary-color;
   border: 2px solid black;
+  padding-bottom: 40px;
 }
 
 #bannerRight {
@@ -57,6 +58,35 @@ body {
   background-color: rgba($color: #000000, $alpha: .4);
   grid-column: 3 / 6;
   color: $accent-color;
+  padding: 10px 10px;
+}
+
+.checkoutTableDiv {
+  grid-column: 3 / 8;
+  color: $accent-color;
+}
+
+.checkoutTable {
+  width: 40%;
+  grid-column: 4 / 5;
+}
+
+.columnTotal {
+  border-top: 1px solid $accent-color;
+  border-bottom: 3px solid $accent-color;
+}
+
+.columnSubTotal {
+  border-top: 1px solid $accent-color;
+}
+
+.rightNumbers {
+  text-align: right;
+}
+
+th {
+  border-top: 3px solid $accent-color;
+  border-bottom: 3px solid $accent-color;
 }
 
 .cartHeader {
@@ -64,8 +94,26 @@ body {
   text-align: center;
 }
 
-.cartProductHeader {
-  grid-column: 3 / 8;
+.cartProduct {
+  grid-column: 3 / 6;
+}
+
+.cartListItem {
+  border-top: 1px solid black;
+  border-bottom: 1px solid black;
+  padding: 10px 10px;
+  color: white;
+}
+
+.checkNavButton {
+  width: 100px;
+  height: 30px;
+  border: 2px solid $accent-color;
+  border-radius: $border-edges;
+}
+
+.shoppingList {
+  list-style-type: none;
 }
 
 .checkoutHeader {
