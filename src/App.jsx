@@ -26,13 +26,43 @@ class App extends React.Component {
   }
 
   componentDidMount() {
-    fetch('/item/loaditems')
-      .then(res => res.json())
-      .then(products => {
-        this.setState({
-          products,
-        });
-      });
+
+    const ditto = {
+      name: "ditto",
+      description: "pink flubber type transforming pokemon",
+      price: "1772855.00",
+      quantity: 2,
+    }
+
+    const dragonite = {
+      name: "dragonite",
+      description: "dragon type pokemon",
+      price: "2000000.00",
+      quantity: 1,
+    }
+
+    const pikachu = {
+      name: "pikachu",
+      description: "An electric type pokemon. This pokemon was thicc in season 1.",
+      price: "955000.00",
+      quantity: 4,
+    }
+
+    this.setState({
+      products: [ditto, dragonite, pikachu],
+      // shoppingCart: [ditto, dragonite],
+      profile: {},
+      loggedIn: false
+    });
+
+    // fetch('/item/loaditems')
+    //   .then(res => res.json())
+    //   .then(products => {
+    //     this.setState({
+    //       products,
+    //     });
+    //   })
+    //   .catch(error => console.log(error));
   }
 
   render() {
@@ -42,7 +72,7 @@ class App extends React.Component {
           <BannerTop />
           <div className="feed">
             <Switch>
-              <Route exact path="/" component={ProductContainer} />
+              <Route exact path="/" component={() => <ProductContainer products={this.state.products} />} />
               <Route path="/profile" component={Profile} />
               <Route path="/shoppingcart" component={ShoppingCart} />
               <Route path="/checkout" component={Checkout} />
