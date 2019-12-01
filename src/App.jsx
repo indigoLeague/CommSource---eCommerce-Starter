@@ -1,13 +1,13 @@
 import React from 'react';
 import { BrowserRouter as Router, Switch, Route } from 'react-router-dom';
-
 import BannerTop from './components/BannerTop.jsx';
 import ProductContainer from './containers/ProductContainer.jsx';
 import Profile from './components/Profile.jsx';
-import ShoppingCart from './components/ShoppingCart.jsx';
+import ShoppingCart from './containers/ShoppingCart.jsx';
 import NotFound from './components/NotFound.jsx';
 import BannerRight from './containers/BannerRight.jsx';
-import Checkout from './components/Checkout.jsx';
+import Checkout from './containers/Checkout.jsx';
+import OrderConfirmation from './components/OrderConfirmation.jsx';
 // import Storefront from './containers/Storefront.jsx';
 
 import './stylesheets/styles.scss';
@@ -23,11 +23,21 @@ class App extends React.Component {
       profile: {},
       loggedIn: false
     };
+<<<<<<< HEAD
     this.addToCart = this.addToCart.bind(this);
+=======
+
+    this.updateCart = this.updateCart.bind(this);
+>>>>>>> dev
   }
 
   componentDidMount() {
 
+<<<<<<< HEAD
+=======
+    //  *** TEMPORARY hard coding of intial state values for developement **
+
+>>>>>>> dev
     const ditto = {
       name: "ditto",
       description: "pink flubber type transforming pokemon",
@@ -48,20 +58,34 @@ class App extends React.Component {
       price: "955000.00",
       quantity: 4,
     }
+<<<<<<< HEAD
 
     this.setState({
       products: [ditto, dragonite, pikachu],
       // shoppingCart: [ditto, dragonite],
+=======
+    
+    this.setState({
+      products: [ditto, dragonite, pikachu],
+      shoppingCart: [ditto, dragonite],
+>>>>>>> dev
       profile: {},
       loggedIn: false
     });
 
+<<<<<<< HEAD
+=======
+    // *** uncomment the below when in production for db data ***
+
+    // try {
+>>>>>>> dev
     // fetch('/item/loaditems')
     //   .then(res => res.json())
     //   .then(products => {
     //     this.setState({
     //       products,
     //     });
+<<<<<<< HEAD
     //   })
     //   .catch(error => console.log(error));
   }
@@ -70,6 +94,35 @@ class App extends React.Component {
     const cart = this.state.shoppingCart;
     cart.push(item);
     return this.setState({ shoppingCart: cart });
+=======
+    //     console.log('check products:', products)
+    //   });
+    // }
+    // catch(error) {
+    //   console.log("the following error occured getting product data:")
+    //   console.log(error);
+    // }  
+  }
+
+  // removes and item from the cart
+  // should be refactored to dynamically remove or add an item
+  // might be better to store cart products in an object rather than an array
+  updateCart(productName) {
+    const shoppingCart = this.state.shoppingCart;
+    let productPosition;
+
+    // get position of product with name
+    for (let i = 0; i < shoppingCart.length; i+=1) {
+      if (shoppingCart[i].name === productName) {
+        productPosition = i;
+        i = shoppingCart.length;
+      }
+    }
+
+    shoppingCart.splice(productPosition, 1);
+
+    return this.setState({ shoppingCart });
+>>>>>>> dev
   }
 
   render() {
@@ -81,8 +134,28 @@ class App extends React.Component {
             <Switch>
               <Route exact path="/" component={() => <ProductContainer products={this.state.products} addToCart={this.addToCart} />} />
               <Route path="/profile" component={Profile} />
-              <Route path="/shoppingcart" component={ShoppingCart} />
-              <Route path="/checkout" component={Checkout} />
+              <Route path="/shoppingcart" component={
+                () => <ShoppingCart
+                    shoppingCart={this.state.shoppingCart}
+                    profile={this.state.profile}
+                    updateCart={this.updateCart}
+                  />
+              } />
+              <Route 
+                path="/checkout" 
+                component={
+                  () => <Checkout
+                    profile={this.state.profile}
+                    shoppingCart={this.state.shoppingCart}
+                  />
+                } 
+              />
+              <Route 
+                path="/confirmation" 
+                component={
+                  () => <OrderConfirmation/>
+                } 
+              />
               <Route component={NotFound} />
             </Switch>
           </div>
