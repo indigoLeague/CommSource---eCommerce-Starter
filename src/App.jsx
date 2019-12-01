@@ -23,7 +23,7 @@ class App extends React.Component {
       profile: {},
       loggedIn: false
     };
-
+    this.addToCart = this.addToCart.bind(this);
     this.updateCart = this.updateCart.bind(this);
   }
 
@@ -51,10 +51,10 @@ class App extends React.Component {
       price: "955000.00",
       quantity: 4,
     }
-    
+
     this.setState({
       products: [ditto, dragonite, pikachu],
-      shoppingCart: [ditto, dragonite],
+      // shoppingCart: [ditto, dragonite],
       profile: {},
       loggedIn: false
     });
@@ -68,13 +68,14 @@ class App extends React.Component {
     //     this.setState({
     //       products,
     //     });
-    //     console.log('check products:', products)
-    //   });
-    // }
-    // catch(error) {
-    //   console.log("the following error occured getting product data:")
-    //   console.log(error);
-    // }  
+    //   })
+    //   .catch(error => console.log(error));
+  }
+
+  addToCart(item) {
+    const cart = this.state.shoppingCart;
+    cart.push(item);
+    return this.setState({ shoppingCart: cart });
   }
 
   // removes and item from the cart
@@ -85,7 +86,7 @@ class App extends React.Component {
     let productPosition;
 
     // get position of product with name
-    for (let i = 0; i < shoppingCart.length; i+=1) {
+    for (let i = 0; i < shoppingCart.length; i += 1) {
       if (shoppingCart[i].name === productName) {
         productPosition = i;
         i = shoppingCart.length;
@@ -104,29 +105,29 @@ class App extends React.Component {
           <BannerTop />
           <div className="feed">
             <Switch>
-              <Route exact path="/" component={ProductContainer} />
+              <Route exact path="/" component={() => <ProductContainer products={this.state.products} addToCart={this.addToCart} />} />
               <Route path="/profile" component={Profile} />
               <Route path="/shoppingcart" component={
                 () => <ShoppingCart
-                    shoppingCart={this.state.shoppingCart}
-                    profile={this.state.profile}
-                    updateCart={this.updateCart}
-                  />
+                  shoppingCart={this.state.shoppingCart}
+                  profile={this.state.profile}
+                  updateCart={this.updateCart}
+                />
               } />
-              <Route 
-                path="/checkout" 
+              <Route
+                path="/checkout"
                 component={
                   () => <Checkout
                     profile={this.state.profile}
                     shoppingCart={this.state.shoppingCart}
                   />
-                } 
+                }
               />
-              <Route 
-                path="/confirmation" 
+              <Route
+                path="/confirmation"
                 component={
-                  () => <OrderConfirmation/>
-                } 
+                  () => <OrderConfirmation />
+                }
               />
               <Route component={NotFound} />
             </Switch>
