@@ -1,3 +1,5 @@
+const { compareSync, hashSync } = require('bcryptjs');
+
 const express = require('express');
 
 const router = express.Router();
@@ -7,6 +9,7 @@ const User = require('../../database/models/user-model');
 
 router.post('/signup', userController.doesUserExist, (req, res, next) => {
   console.log('POST signup in user router');
+  req.body.password = hashSync(req.body.password, 10);
   const newUser = new User({
     name: req.body.name, password: req.body.password, cartSession: {}, loginSession: req.session
   });
