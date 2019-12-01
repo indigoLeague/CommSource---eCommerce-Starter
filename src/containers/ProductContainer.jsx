@@ -11,7 +11,7 @@ function ProductContainer(props) {
       description={item.description}
       price={item.price}
       quantity={item.quantity}
-      addToCart={item.addToCart}
+      addToCart={props.addToCart}
     />
   });
 

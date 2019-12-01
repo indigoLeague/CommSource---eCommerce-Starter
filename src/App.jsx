@@ -68,7 +68,8 @@ class App extends React.Component {
 
   addToCart(item) {
     const cart = this.state.shoppingCart;
-    this.setState({ shoppingCart: cart.push(item) });
+    cart.push(item);
+    return this.setState({ shoppingCart: cart });
     // console.log('shoppingCart after adding item: ', this.state.shoppingCart);
   }
 
