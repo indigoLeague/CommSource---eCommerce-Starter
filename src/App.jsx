@@ -23,6 +23,7 @@ class App extends React.Component {
       profile: {},
       loggedIn: false
     };
+    this.addToCart = this.addToCart.bind(this);
   }
 
   componentDidMount() {
@@ -65,6 +66,12 @@ class App extends React.Component {
     //   .catch(error => console.log(error));
   }
 
+  addToCart(item) {
+    const cart = this.state.shoppingCart;
+    this.setState({ shoppingCart: cart.push(item) });
+    // console.log('shoppingCart after adding item: ', this.state.shoppingCart);
+  }
+
   render() {
     return (
       <Router>
@@ -72,7 +79,7 @@ class App extends React.Component {
           <BannerTop />
           <div className="feed">
             <Switch>
-              <Route exact path="/" component={() => <ProductContainer products={this.state.products} />} />
+              <Route exact path="/" component={() => <ProductContainer products={this.state.products} addToCart={this.addToCart} />} />
               <Route path="/profile" component={Profile} />
               <Route path="/shoppingcart" component={ShoppingCart} />
               <Route path="/checkout" component={Checkout} />

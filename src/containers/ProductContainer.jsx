@@ -5,7 +5,14 @@ function ProductContainer(props) {
 
   // console.log('props in productContainer: ', props);
   const products = props.products.map((item, ind) => {
-    return <ProductCard key={ind} name={item.name} description={item.description} price={item.price} quantity={item.quantity} />
+    return <ProductCard
+      key={ind}
+      name={item.name}
+      description={item.description}
+      price={item.price}
+      quantity={item.quantity}
+      addToCart={item.addToCart}
+    />
   });
 
   return (

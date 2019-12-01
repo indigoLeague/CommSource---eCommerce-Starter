@@ -1,3 +1,4 @@
+/* eslint-disable react/button-has-type */
 import React, { useState } from 'react';
 
 function ProductCard(props) {
@@ -10,13 +11,19 @@ function ProductCard(props) {
       <p>{props.description}</p>
       <p>${props.price}</p>
       <p>{itemQty} items left</p>
-      <button onClick={() => (itemQty) ? addItems(itemQty - 1) : 0}>
+      <button onClick={(props) => {
+        if (itemQty) {
+          addItems(itemQty - 1);
+          console.log(props.target);
+          // props.addToCart(props.target);
+        } else { 0 }
+      }}>
         Add to Cart
       </button>
       <button onClick={() => (itemQty < props.quantity) ? addItems(itemQty + 1) : props.quantity}>
         Remove from Cart
       </button>
-    </div>
+    </div >
   )
 };
 
