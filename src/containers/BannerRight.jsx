@@ -10,6 +10,7 @@ class BannerRight extends Component {
     };
     this.handleChange = this.handleChange.bind(this);
     this.handleLoginSubmit = this.handleLoginSubmit.bind(this);
+    this.handleLogOut = this.handleLogOut.bind(this);
   }
 
   componentDidMount() {
@@ -25,6 +26,13 @@ class BannerRight extends Component {
     });
   }
 
+  handleLogOut(e) {
+    e.preventDefault();
+    console.log('logging out');
+    fetch('/user/logout')
+      .then(this.props.updateLogOut);
+  }
+
   handleLoginSubmit(e) {
     e.preventDefault();
     fetch('/user/signin', {
@@ -34,12 +42,16 @@ class BannerRight extends Component {
         'Content-Type': 'application/json'
       },
       body: JSON.stringify({ name: this.state.name, password: this.state.password })
-    });
+    }).then(this.props.updateRender)
+      .then(() => {
+        this.state.name = '';
+        this.state.password = '';
+      });
   }
 
   render() {
     return (
-      <Login state={this.state} handleChange={this.handleChange} handleLoginSubmit={this.handleLoginSubmit} />
+      <Login appState={this.props.state} state={this.state} handleChange={this.handleChange} handleLoginSubmit={!this.props.state.loggedIn ? this.handleLoginSubmit : this.handleLogOut} />
     );
   }
 }

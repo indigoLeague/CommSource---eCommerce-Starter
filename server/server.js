@@ -34,6 +34,8 @@ const csrfProtection = csrf({ cookie: true });
 app.use(express.static(path.join(__dirname, '../public')));
 
 app.get('/', csrfProtection, (req, res) => {
+  if (req.cookies.sessionToken && req.session.userId) res.cookie('userId', req.session.userId);
+
   res.sendFile(path.resolve(__dirname, '../src/index.html'), { csrfToken: req.csrfToken() });
 });
 
@@ -44,6 +46,8 @@ app.get('/who', (req, res, next) => {
       return res.json({ user: success[0], session: req.sessionID });
     });
     // return res.json({ user: req.session.userId, session: req.sessionID });
+  } else {
+    res.end();
   }
 });
 

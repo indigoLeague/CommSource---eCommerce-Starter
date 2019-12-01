@@ -7,7 +7,7 @@ userController.getItem = (req, res, next) => {
 };
 
 userController.validateUser = async (req, res, next) => {
-  await User.find({ name: req.body.name }, (err, succ) => {
+  await User.find({ name: req.body.name, password: req.body.password }, (err, succ) => {
     if (err) return next({ error: err.stack });
 
     if (succ[0] === undefined) {
@@ -16,6 +16,8 @@ userController.validateUser = async (req, res, next) => {
     const sessionData = req.session;
     sessionData.userId = succ[0]._id;
     console.log('Setting session data: ', sessionData.userId);
+    res.redirect('/');
+    next();
   });
   next();
 };

@@ -19,31 +19,6 @@ const userSchema = new Schema({
   cartSession: { type: Object, required: true },
   loginSession: { type: Object, required: true }
 });
-// const UserSchema = new mongoose.Schema({
-//   name: {
-//     type: String,
-//     validate: {
-//       validator: (name) => User.doesNotExist({ name }),
-//       message: 'Username already exists'
-//     }
-//   },
-//   password: {
-//     type: String,
-//     required: true
-//   }
-// }, { timestamps: true });
-
-// UserSchema.pre('save', function () {
-//   if (this.isModified('password')) {
-//     this.password = hashSync(this.password, 10);
-//   }
-// });
-// UserSchema.statics.doesNotExist = async function (field) {
-//   return await this.where(field).countDocuments() === 0;
-// };
-// UserSchema.methods.comparePasswords = function (password) {
-//   return compareSync(password, this.password);
-// };
 
 const User = mongoose.model('User', userSchema);
 

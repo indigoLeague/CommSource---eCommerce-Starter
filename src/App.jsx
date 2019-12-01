@@ -22,15 +22,24 @@ class App extends React.Component {
       products: [],
       shoppingCart: [],
       profile: {},
-      loggedIn: false
+      loggedIn: false,
+      username: ''
     };
+    this.updateRender = this.updateRender.bind(this);
+    this.updateLogOut = this.updateLogOut.bind(this);
   }
 
   componentDidMount() {
-    fetch('/who')
-      .then((res) => res.json())
-      .then((data) => { if (data) console.log('DATA', data); });
-
+    if (this.props.cookies.cookies.userId) {
+      fetch('/who')
+        .then((res) => res.json())
+        .then((data) => {
+          this.setState((prevState) => ({
+            ...prevState, loggedIn: !prevState.loggedIn, username: data.user.name
+          }));
+        });
+    }
+    // console.log('USERID', userId);
     fetch('/item/loaditems')
       .then((res) => res.json())
       .then((products) => {
@@ -38,6 +47,34 @@ class App extends React.Component {
           products,
         });
       });
+  }
+
+  componentDidUpdate() {
+    console.log(this.state);
+  }
+
+  updateLogOut() {
+    this.setState((prevState) => ({
+      ...prevState, loggedIn: !prevState.loggedIn, username: ''
+    }));
+  }
+
+  updateRender() {
+    setTimeout(() => {
+      // if (this.props.cookies.cookies.userId) {
+      fetch('/who')
+        .then((res) => res.json())
+        .then((data) => {
+          if (data) {
+            this.setState((prevState) => ({
+              ...prevState, loggedIn: !prevState.loggedIn, username: data.user.name
+            }));
+          }
+          console.log('STATE', this.state);
+        });
+      // }
+    },
+    1);
   }
 
   render() {
@@ -54,7 +91,7 @@ class App extends React.Component {
               <Route component={NotFound} />
             </Switch>
           </div>
-          <BannerRight cookies={this.props.cookies} />
+          <BannerRight state={this.state} updateLogOut={this.updateLogOut} updateRender={this.updateRender} />
         </div>
       </Router>
     );
