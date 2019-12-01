@@ -1,9 +1,38 @@
 import React, { Component } from 'react';
 import {Route, Switch} from 'react-router-dom'
 import {Link, withRouter} from 'react-router-dom'
+import ProductInvoice from '../components/ProductInvoice.jsx';
 
 class Checkout extends Component {
 
+  // calculates order total before tax
+  orderTotal(cart) {
+    let total = 0;
+    
+    for (let product of cart) {
+      let quantitySold = product.quantitySold || 1;
+      total += product.price * quantitySold;
+    }
+
+    return total
+  }
+
+  // converts a number in to a USD currency format
+  makeCurrency(num) {
+    const formattedNumber = num.toLocaleString('us-US', { style: 'currency', currency: 'USD' });
+    return formattedNumber;
+  }
+
+  // call product invoice component to create table rows for each product
+  createProductRows (cart, cb) {
+    const productRows = cart.map(product => {
+      return <ProductInvoice product={product} makeCurrency={cb}/>
+    })
+
+    return productRows
+  }
+
+  // on event function for copying the shipping address to the billing address
   updateShippingAddress(event) {
     const billingStreet = document.getElementById("billingStreet");
     const billingState = document.getElementById("billingState");
@@ -24,9 +53,8 @@ class Checkout extends Component {
 
   }
 
-
-
   render() {
+    console.log(this.props.shoppingCart)
     return (
       <>
       
@@ -34,23 +62,27 @@ class Checkout extends Component {
 
         <div className="checkoutTableDiv">
           <h2> Order Summary </h2>
+
           <table className="checkoutTable">
             <tr>
               <th> Item </th> 
-              <th> total </th>
+              <th> Total </th>
             </tr>
+
+            {this.createProductRows(this.props.shoppingCart, this.makeCurrency)}
+
             <tr>
-              <td>Total</td>
-              <td className="rightNumbers">$ 1,000,000.00</td>
+              <td className="columnSubTotal"> Total</td>
+              <td className="rightNumbers columnSubTotal">{this.makeCurrency(this.orderTotal(this.props.shoppingCart))}</td>
             </tr>
             <tr>
               <td>Tax</td>
-              <td className="rightNumbers">$ 200,000.00</td>
+              <td className="rightNumbers"> {this.makeCurrency(.09 * this.orderTotal(this.props.shoppingCart))}</td>
             </tr>
               <br></br>
             <tr>
               <td className="columnTotal">Grand Total</td>
-              <td className="columnTotal rightNumbers">$ 1,200,000.00</td>
+              <td className="columnTotal rightNumbers"> {this.makeCurrency(1.09 * this.orderTotal(this.props.shoppingCart))} </td>
             </tr>
           </table>
         </div>

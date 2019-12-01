@@ -6,7 +6,7 @@ import Profile from './components/Profile.jsx';
 import ShoppingCart from './containers/ShoppingCart.jsx';
 import NotFound from './components/NotFound.jsx';
 import BannerRight from './containers/BannerRight.jsx';
-import Checkout from './components/Checkout.jsx';
+import Checkout from './containers/Checkout.jsx';
 import OrderConfirmation from './components/OrderConfirmation.jsx';
 // import Storefront from './containers/Storefront.jsx';
 
@@ -118,6 +118,7 @@ class App extends React.Component {
                 component={
                   () => <Checkout
                     profile={this.state.profile}
+                    shoppingCart={this.state.shoppingCart}
                   />
                 } 
               />
