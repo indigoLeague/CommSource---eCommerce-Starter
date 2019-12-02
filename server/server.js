@@ -34,7 +34,6 @@ const csrfProtection = csrf({ cookie: true });
 app.use(express.static(path.join(__dirname, '../public')));
 
 app.get('/', csrfProtection, (req, res) => {
-  console.log('/ initial session', req.session);
   if (req.cookies.sessionToken && req.session.userId) res.cookie('userId', `${req.session.userId}.${req.session.username}`);
 
   res.sendFile(path.resolve(__dirname, '../src/index.html'), { csrfToken: req.csrfToken() });

@@ -33,12 +33,14 @@ class App extends React.Component {
 
 
   componentDidMount() {
+    console.log(this.props.cookies.cookies.userId);
     if (this.props.cookies.cookies.userId) {
       fetch('/who')
         .then((res) => res.json())
         .then((data) => {
+          console.log('DATA', data);
           this.setState((prevState) => ({
-            ...prevState, loggedIn: !prevState.loggedIn, username: data.user.name
+            ...prevState, shoppingCart: data.user.cartSession, loggedIn: !prevState.loggedIn, username: data.user.name
           }));
         });
     }

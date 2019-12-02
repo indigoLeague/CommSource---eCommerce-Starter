@@ -37,14 +37,14 @@ router.post('/signin', userController.validateUser, (req, res, next) => {
 });
 
 router.post('/update', async (req, res, next) => {
-  console.log('COOKIES', req.session.username);
+  // console.log('COOKIES', req.session.username);
 
   await User.findOneAndUpdate({ name: req.session.username }, { cartSession: req.body.cart }, { returnOriginal: false }, (err, doc) => {
     if (err) {
       console.log('Something wrong when updating data!');
     }
 
-    console.log(doc);
+    // console.log(doc);
   });
 
   res.end('updated');
