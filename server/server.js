@@ -34,7 +34,8 @@ const csrfProtection = csrf({ cookie: true });
 app.use(express.static(path.join(__dirname, '../public')));
 
 app.get('/', csrfProtection, (req, res) => {
-  if (req.cookies.sessionToken && req.session.userId) res.cookie('userId', req.session.userId);
+  console.log('/ initial session', req.session);
+  if (req.cookies.sessionToken && req.session.userId) res.cookie('userId', `${req.session.userId}.${req.session.username}`);
 
   res.sendFile(path.resolve(__dirname, '../src/index.html'), { csrfToken: req.csrfToken() });
 });
@@ -58,6 +59,10 @@ app.get('/who', (req, res, next) => {
 //   // console.log(userInfo);
 //   res.sendFile(path.resolve(__dirname, '../src/index.html'), { csrfToken: req.csrfToken() });
 // });
+app.use('/profile', (req, res) => {
+  res.redirect('/');
+});
+
 app.use('/shoppingcart', (req, res) => {
   res.redirect('/');
 });

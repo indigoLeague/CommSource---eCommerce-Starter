@@ -43,7 +43,11 @@ class BannerRight extends Component {
         'Content-Type': 'application/json'
       },
       body: JSON.stringify({ name: this.state.name, password: this.state.password })
-    });
+    }).then(this.props.updateRender)
+      .then(() => {
+        this.state.name = '';
+        this.state.password = '';
+      });
   }
 
   handleLoginSubmit(e) {
@@ -62,6 +66,8 @@ class BannerRight extends Component {
       });
   }
 
+  // loginSubmit is prop drilling login or login method based on loggedIn status
+  // from App state
   render() {
     return (
       <>

@@ -1,7 +1,6 @@
 import React from 'react';
 
 function Login(props) {
-  console.log('APP', props.appState);
   return (
     <div>
       <form onSubmit={props.handleLoginSubmit}>
@@ -14,7 +13,7 @@ function Login(props) {
           <input type="password" name="password" value={props.state.password} onChange={(e) => props.handleChange(e)} />
         </div>
         <input type="submit" value={props.appState.loggedIn ? 'Log Out' : 'Log In'} />
-        <button className="sign-up" onClick={props.handleSignUp}>Sign Up</button>
+        <button className={props.appState.loggedIn ? 'hideButton' : 'showButton'} onClick={props.handleSignUp}>Sign Up</button>
 
       </form>
 

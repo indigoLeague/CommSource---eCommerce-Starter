@@ -1,6 +1,7 @@
 import React from 'react';
 import { BrowserRouter as Router, Switch, Route } from 'react-router-dom';
 import { withCookies } from 'react-cookie';
+import Admin from './components/Admin.jsx';
 
 import BannerTop from './components/BannerTop.jsx';
 import ProductContainer from './containers/ProductContainer.jsx';
@@ -26,6 +27,8 @@ class App extends React.Component {
     };
     this.updateRender = this.updateRender.bind(this);
     this.updateLogOut = this.updateLogOut.bind(this);
+    this.addToCart = this.addToCart.bind(this);
+    this.updateCart = this.updateCart.bind(this);
   }
 
 
@@ -40,16 +43,18 @@ class App extends React.Component {
         });
     }
 
-    // console.log('USERID', userId);
-    fetch('/item/loaditems')
-      .then((res) => res.json())
-      .then((products) => {
-        this.setState({
-          products,
-        });
-      });
+    // *** uncomment the below when in production for db data ***
 
-    this.updateCart = this.updateCart.bind(this);
+    // try {
+    // fetch('/item/loaditems')
+    //   .then(res => res.json())
+    //   .then(products => {
+    //     this.setState({
+    //       products,
+    //     });
+    //   })
+    //   .catch(error => console.log(error));
+
     //  *** TEMPORARY hard coding of intial state values for developement **
 
     const ditto = {
@@ -73,12 +78,13 @@ class App extends React.Component {
       quantity: 4,
     };
 
-    this.setState({
+    this.setState((prevState) => ({
+      ...prevState,
       products: [ditto, dragonite, pikachu],
-      shoppingCart: [ditto, dragonite],
+      // shoppingCart: [ditto, dragonite],
       profile: {},
       loggedIn: false
-    });
+    }));
 
     // *** uncomment the below when in production for db data ***
 
@@ -89,6 +95,26 @@ class App extends React.Component {
     //     this.setState({
     //       products,
     //     });
+    //   })
+    //   .catch(error => console.log(error));
+  }
+
+  addToCart(item) {
+    const cart = this.state.shoppingCart;
+    cart.push(item);
+    // console.log('CART', Array.isArray(cart));
+    // console.log('COOK', this.props.cookies.cookies.userId);
+    if (this.props.cookies.cookies.userId) {
+      fetch('/user/update', {
+        method: 'POST',
+        headers: {
+          Accept: 'application/json',
+          'Content-Type': 'application/json'
+        },
+        body: JSON.stringify({ id: this.props.cookies.cookies.userId, cart })
+      }).then((res) => res.json()).then((data) => console.log(data));
+    }
+    return this.setState({ shoppingCart: cart });
     //     console.log('check products:', products)
     //   });
     // }
@@ -146,11 +172,12 @@ class App extends React.Component {
     return (
       <Router>
         <div className="storeFront">
-          <BannerTop />
+          <BannerTop state={this.state} />
           <div className="feed">
             <Switch>
-              <Route exact path="/" component={ProductContainer} />
-              <Route path="/profile" component={Profile} />
+              <Route path="/admin" component={() => <Admin />} />
+              <Route exact path="/" component={() => <ProductContainer products={this.state.products} addToCart={this.addToCart} />} />
+              <Route path="/profile" component={() => <Profile username={this.state.username} />} />
               <Route
                 path="/shoppingcart"
                 component={
