@@ -23,21 +23,15 @@ class App extends React.Component {
       profile: {},
       loggedIn: false
     };
-<<<<<<< HEAD
     this.addToCart = this.addToCart.bind(this);
-=======
 
     this.updateCart = this.updateCart.bind(this);
->>>>>>> dev
   }
 
   componentDidMount() {
 
-<<<<<<< HEAD
-=======
     //  *** TEMPORARY hard coding of intial state values for developement **
 
->>>>>>> dev
     const ditto = {
       name: "ditto",
       description: "pink flubber type transforming pokemon",
@@ -58,34 +52,23 @@ class App extends React.Component {
       price: "955000.00",
       quantity: 4,
     }
-<<<<<<< HEAD
 
     this.setState({
       products: [ditto, dragonite, pikachu],
-      // shoppingCart: [ditto, dragonite],
-=======
-    
-    this.setState({
-      products: [ditto, dragonite, pikachu],
       shoppingCart: [ditto, dragonite],
->>>>>>> dev
       profile: {},
       loggedIn: false
     });
 
-<<<<<<< HEAD
-=======
     // *** uncomment the below when in production for db data ***
 
     // try {
->>>>>>> dev
     // fetch('/item/loaditems')
     //   .then(res => res.json())
     //   .then(products => {
     //     this.setState({
     //       products,
     //     });
-<<<<<<< HEAD
     //   })
     //   .catch(error => console.log(error));
   }
@@ -94,7 +77,6 @@ class App extends React.Component {
     const cart = this.state.shoppingCart;
     cart.push(item);
     return this.setState({ shoppingCart: cart });
-=======
     //     console.log('check products:', products)
     //   });
     // }
@@ -112,7 +94,7 @@ class App extends React.Component {
     let productPosition;
 
     // get position of product with name
-    for (let i = 0; i < shoppingCart.length; i+=1) {
+    for (let i = 0; i < shoppingCart.length; i += 1) {
       if (shoppingCart[i].name === productName) {
         productPosition = i;
         i = shoppingCart.length;
@@ -122,7 +104,6 @@ class App extends React.Component {
     shoppingCart.splice(productPosition, 1);
 
     return this.setState({ shoppingCart });
->>>>>>> dev
   }
 
   render() {
@@ -136,25 +117,25 @@ class App extends React.Component {
               <Route path="/profile" component={Profile} />
               <Route path="/shoppingcart" component={
                 () => <ShoppingCart
-                    shoppingCart={this.state.shoppingCart}
-                    profile={this.state.profile}
-                    updateCart={this.updateCart}
-                  />
+                  shoppingCart={this.state.shoppingCart}
+                  profile={this.state.profile}
+                  updateCart={this.updateCart}
+                />
               } />
-              <Route 
-                path="/checkout" 
+              <Route
+                path="/checkout"
                 component={
                   () => <Checkout
                     profile={this.state.profile}
                     shoppingCart={this.state.shoppingCart}
                   />
-                } 
+                }
               />
-              <Route 
-                path="/confirmation" 
+              <Route
+                path="/confirmation"
                 component={
-                  () => <OrderConfirmation/>
-                } 
+                  () => <OrderConfirmation />
+                }
               />
               <Route component={NotFound} />
             </Switch>
