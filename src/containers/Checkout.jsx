@@ -5,6 +5,22 @@ import ProductInvoice from '../components/ProductInvoice.jsx';
 
 class Checkout extends Component {
 
+  sendOrder(cart) {
+    const itemsBought = {};
+    
+    for (let product of cart) {
+      let name = product.name;
+      itemsBought[name] ? itemsBought[name] += 1 : itemsBought[name] = 1;
+    }
+    
+    fetch('/item/buyitems', {
+      headers: {'Content-Type': 'application/json'},
+      method: 'POST',
+      body: JSON.stringify(itemsBought)
+    })
+
+  }
+
   // calculates order total before tax
   orderTotal(cart) {
     let total = 0;
@@ -54,7 +70,7 @@ class Checkout extends Component {
   }
 
   render() {
-    console.log(this.props.shoppingCart)
+    
     return (
       <>
       
@@ -180,7 +196,7 @@ class Checkout extends Component {
             <button className="checkNavButton"> back </button>
           </Link>
           <Link to="/confirmation">
-            <button className="checkNavButton"> send order </button>
+            <button className="checkNavButton" onClick={() => this.sendOrder(this.props.shoppingCart)}> send order </button>
           </Link>
         </div>
 

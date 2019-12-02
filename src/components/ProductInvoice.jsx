@@ -14,9 +14,3 @@ const ProductInvoice = (props) => {
 }
 
 export default ProductInvoice
-
-
-
-
-
-
