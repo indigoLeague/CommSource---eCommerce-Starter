@@ -20,7 +20,7 @@ itemController.buyItems = (req, res, next) => {
 
   for (let i = 0; i < toBeUpdated.length; i++) {
     const currentTBU = toBeUpdated[i];
-
+    
     // query database for particular item that matches currentTBU name
 
     Item.find({ name: currentTBU[0] }, (err, succ) => {
