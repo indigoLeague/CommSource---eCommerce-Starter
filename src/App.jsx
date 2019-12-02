@@ -24,7 +24,6 @@ class App extends React.Component {
       loggedIn: false
     };
     this.addToCart = this.addToCart.bind(this);
-
     this.updateCart = this.updateCart.bind(this);
   }
 
@@ -55,7 +54,7 @@ class App extends React.Component {
 
     this.setState({
       products: [ditto, dragonite, pikachu],
-      shoppingCart: [ditto, dragonite],
+      // shoppingCart: [ditto, dragonite],
       profile: {},
       loggedIn: false
     });

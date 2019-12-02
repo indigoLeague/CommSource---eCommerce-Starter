@@ -30,6 +30,11 @@ $border-edges: 10px;
 #bannerTop {
   grid-column: 1 / 4;
   background-color: $tertiary-color;
+  display: flex;
+}
+
+#shoppingClock {
+  display: inline-flex;
 }
 
 .feed {
