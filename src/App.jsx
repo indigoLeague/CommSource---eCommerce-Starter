@@ -76,6 +76,13 @@ class App extends React.Component {
     const cart = this.state.shoppingCart;
     cart.push(item);
     return this.setState({ shoppingCart: cart });
+    //     console.log('check products:', products)
+    //   });
+    // }
+    // catch(error) {
+    //   console.log("the following error occured getting product data:")
+    //   console.log(error);
+    // }  
   }
 
   // removes and item from the cart
