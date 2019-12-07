@@ -1,3 +1,5 @@
+// import { compareSync, hashSync } from 'bcryptjs';
+
 const mongoose = require('mongoose');
 
 const { Schema } = mongoose;

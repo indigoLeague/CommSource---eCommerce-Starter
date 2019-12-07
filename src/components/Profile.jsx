@@ -1,8 +1,8 @@
 import React from 'react';
 
-function Profile() {
+function Profile(props) {
   return (
-    <div>this is profile component</div>
+    <div>User: {props.username}</div>
   );
 }
 

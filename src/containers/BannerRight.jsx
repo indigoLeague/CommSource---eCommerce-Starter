@@ -10,6 +10,12 @@ class BannerRight extends Component {
     };
     this.handleChange = this.handleChange.bind(this);
     this.handleLoginSubmit = this.handleLoginSubmit.bind(this);
+    this.handleLogOut = this.handleLogOut.bind(this);
+    this.handleSignUp = this.handleSignUp.bind(this);
+  }
+
+  componentDidMount() {
+    console.log('banner props', this.props);
   }
 
   handleChange(e) {
@@ -21,14 +27,52 @@ class BannerRight extends Component {
     });
   }
 
-  handleLoginSubmit(e) {
+  handleLogOut(e) {
     e.preventDefault();
-    console.log(this.state);
+    console.log('logging out');
+    fetch('/user/logout')
+      .then(this.props.updateLogOut);
   }
 
+  handleSignUp(e) {
+    e.preventDefault();
+    fetch('/user/signup', {
+      method: 'POST',
+      headers: {
+        Accept: 'application/json',
+        'Content-Type': 'application/json'
+      },
+      body: JSON.stringify({ name: this.state.name, password: this.state.password })
+    }).then(this.props.updateRender)
+      .then(() => {
+        this.state.name = '';
+        this.state.password = '';
+      });
+  }
+
+  handleLoginSubmit(e) {
+    e.preventDefault();
+    fetch('/user/signin', {
+      method: 'POST',
+      headers: {
+        Accept: 'application/json',
+        'Content-Type': 'application/json'
+      },
+      body: JSON.stringify({ name: this.state.name, password: this.state.password })
+    }).then(this.props.updateRender)
+      .then(() => {
+        this.state.name = '';
+        this.state.password = '';
+      });
+  }
+
+  // loginSubmit is prop drilling login or login method based on loggedIn status
+  // from App state
   render() {
     return (
-      <Login state={this.state} handleChange={this.handleChange} handleLoginSubmit={this.handleLoginSubmit} />
+      <>
+        <Login className="login-form" appState={this.props.state} state={this.state} handleChange={this.handleChange} handleSignUp={this.handleSignUp} handleLoginSubmit={!this.props.state.loggedIn ? this.handleLoginSubmit : this.handleLogOut} />
+      </>
     );
   }
 }
